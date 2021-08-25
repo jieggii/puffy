@@ -24,7 +24,7 @@ func handleRequest(w http.ResponseWriter, r *http.Request, cfg *config.Config) {
 			// todo: validate payload signature
 			// (https://docs.github.com/en/developers/webhooks-and-events/webhooks/securing-your-webhooks)
 			pid := utils.Execute(repo.Exec)
-			fmt.Println("got push event from", repo.Name, ". Executing command", repo.Exec, ". PID:", pid)
+			fmt.Println("got push event from", repo.Name+". Starting process \""+repo.Exec+"\". PID:", pid)
 			knownRepo = true
 			break
 		}

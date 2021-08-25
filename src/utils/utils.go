@@ -44,7 +44,7 @@ func Execute(command string) int {
 	go func() {
 		err = cmd.Wait()
 		if err != nil {
-			fmt.Printf("command \"" + command + "\" finished with error:", err)
+			fmt.Printf("command \""+command+"\" finished with error:", err)
 		}
 	}()
 	return pid
