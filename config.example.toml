@@ -1,0 +1,14 @@
+host = "0.0.0.0"  # optional
+port = 8080
+endpoint = "/"  # optional
+
+[[repo]]
+name = "username/reponame"
+secret = "secret"
+exec = "/path/to/script.sh"
+
+[[repo]]
+name = "username/reponame"
+secret = "secret2"
+exec = "/usr/bin/reboot"
+
