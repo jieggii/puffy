@@ -58,4 +58,7 @@ And after that, you probably would like to `enable` it, so that it starts with t
 
 `sudo systemctl enable puffy.service`
 
+### 3: Uninstalling
+puffy can be easily uninstalled via `uninstall.sh` script. Just run it.
+
 ...
