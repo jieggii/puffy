@@ -43,13 +43,16 @@ _Also note, that after every configuration edits you need to restart puffy_
 ### 2: Running with systemd
 When everything is set up, it's time to use the program what it is for was made.
 Puffy is in general meant to be used as a systemd service.
+
 At first start it:
 
 `sudo systemctl start puffy.service`
 
+
 You can check its status if you want to make sure everything's fine:
 
 `systemctl status puffy.service`
+
 
 And after that, you probably would like to `enable` it, so that it starts with the start of the server
 
