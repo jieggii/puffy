@@ -1,5 +1,5 @@
-# puffy
-(WIP) Puffy is an extremely simple unixway GitHub webhook listener and handler for push events
+# (WIP) puffy
+Puffy is an extremely simple unixway GitHub webhook listener and handler for push events
 
 ## Todo
 - [ ] Add payload signature validation (WIP)
