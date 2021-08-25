@@ -6,7 +6,7 @@ After=network.target
 [Service]
 Environment="PUFFY_CONFIG_PATH=/etc/puffy/config.toml"
 ExecStart=/usr/bin/puffy
-User=nobody
+User=root
 
 # Useful during debugging; remove it once the service is working
 StandardOutput=console
