@@ -9,4 +9,4 @@ sudo cp -iv puffy.service /etc/systemd/system/
 echo "Done!"
 echo "If you don't see any errors above, puffy is likely installed :)"
 echo "Now I suppose you would like to edit the config file (by default it is located at /etc/puffy/config.toml)"
-echo "For more information please check https://github.com/jieggii/puffy/README.md"
+echo "For more information please check https://github.com/jieggii/puffy/blob/master/README.md"
