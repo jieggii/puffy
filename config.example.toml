@@ -3,12 +3,11 @@ port = 8080
 endpoint = "/"  # optional
 
 [[repo]]
-name = "username/reponame"
-secret = "secret"
-exec = "/path/to/script.sh"
+name = "username/repo-name"
+secret = "my super secret"
+exec = "/usr/bin/touch /root/hewwo-cutie^^"
 
 [[repo]]
-name = "username/reponame"
-secret = "secret2"
-exec = "/usr/bin/reboot"
-
+name = "username/repo-name"
+secret = "qwerty12345"
+exec = "/home/user/scripts/script.sh"
