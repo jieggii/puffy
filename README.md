@@ -13,7 +13,7 @@ Simply run `install.sh` script to install puffy. The script will:
 * Create `puffy` directory at `/etc/` and copy its config file to it
 * Copy `puffy.service` to `/etc/systemd/system/` directory
 
-## Running
+## Usage
 ### 1: Configuration
 First you need to configure puffy. Configuration file is in `TOML`, so, 
 primarily get acquainted with [toml specification](https://github.com/kezhuw/toml-spec)
