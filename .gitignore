@@ -5,6 +5,8 @@
 *.so
 *.dylib
 
+go.sum
+
 # Test binary, built with `go src -c`
 *.test
 
