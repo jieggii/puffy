@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 echo "Uninstalling puffy..."
 sudo rm -f /usr/bin/puffy
-sudo rm -rf /etc/puffy
-sudo rm -f /etc/systemd/system/puffy.service
+sudo rm -rif /etc/puffy
+sudo rm -if /etc/systemd/system/puffy.service
 echo "Done!"
