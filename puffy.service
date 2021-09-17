@@ -1,5 +1,5 @@
 [Unit]
-Description=extremely simple GitHub push webhook listener
+Description=GitHub push webhook listener
 Wants=network-online.target
 After=network.target
 
