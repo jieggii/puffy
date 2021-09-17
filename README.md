@@ -1,22 +1,24 @@
 # puffy
-Puffy is an extremely simple unixway GitHub webhook listener for push events which is supposed to be run as systemd service
-
-## Todo
-- [ ] Add payload signature validation
+Puffy is an extremely simple unixway GitHub webhook listener for push events which is supposed to be run as systemd service.
 
 ## Dependencies
 * golang
 
 ## Installation
 Simply run `install.sh` script to install puffy. The script will:
-* Build puffy binary and move it to `/usr/bin/puffy`
-* Create `puffy` directory at `/etc/` and copy its config file to it
-* Copy `puffy.service` to `/etc/systemd/system/` directory
+* Build puffy binary and move it to `/usr/bin/puffy`.
+* Create `puffy` directory at `/etc/` and copy its config file to it.
+* Copy `puffy.service` to `/etc/systemd/system/` directory.
+
+## Uninstallation
+Puffy can be easily uninstalled using `uninstall.sh` script. Just run it.
+It will remove all puffy files, including its config and systemd service file 
+if you agree in interactive prompt
 
 ## Usage
-### 1: Configuration
-First you need to configure puffy. Configuration file is in `TOML`, so, 
-primarily get acquainted with [toml specification](https://github.com/kezhuw/toml-spec)
+### Step 1: Configuration
+You need to configure puffy at first. Configuration file is in `TOML` format, so, 
+primarily get acquainted with [toml specification](https://github.com/kezhuw/toml-spec).
 
 Open `/etc/puffy/config.toml` (this is where it is located by default) with your favourite text editor:
 ```toml
@@ -35,28 +37,23 @@ secret = "qwerty12345"
 exec = "/home/user/scripts/script.sh"
 ```
 
-Edit fields as you want! A new repository can be added under `[[repo]]` line.
-Please be sure to indicate `name`, `secret` and `exec` fields. They are required.
+Edit fields and add your repositories.
 
-_Also note, that after every configuration edits you need to restart puffy_
+_Note: you need to restart puffy after every configuration edits._
 
-### 2: Running with systemd
-When everything is set up, it's time to use the program what it is for was made.
-Puffy is in general meant to be used as a systemd service.
+### Step 2: Running with systemd
+When puffy is set up, it's time to use it! Puffy is supposed to be used with systemd, 
+but nothing prevents you from running it in the way you want. 
+For example directly, just using `puffy` command. Anyway, I will show how to use it with systemd.
 
 At first start it:
-
 `sudo systemctl start puffy.service`
 
-
 You can check its status if you want to make sure everything's fine:
-
 `systemctl status puffy.service`
 
-
-And after that, you probably would like to `enable` it, so that it starts with the start of the server
-
+And after that, you would probably like to `enable` it, so that it starts with the start of the server
 `sudo systemctl enable puffy.service`
 
-### 3: Uninstalling
-puffy can be easily uninstalled via `uninstall.sh` script. Just run it.
+## Todo
+- [ ] Add payload signature validation
