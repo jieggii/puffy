@@ -23,7 +23,7 @@ func handleRequest(w http.ResponseWriter, r *http.Request, cfg *config.Config) {
 			// todo: validate payload signature
 			// (https://docs.github.com/en/developers/webhooks-and-events/webhooks/securing-your-webhooks)
 			pid := utils.Execute(repo.Exec)
-			log.Println("got push event from", repo.Name+". Starting process \""+repo.Exec+"\". PID:", pid)
+			log.Println("got push event from", repo.Name + ". Starting process \"" + repo.Exec + "\". PID:", pid)
 			knownRepo = true
 			break
 		}
@@ -41,7 +41,7 @@ func main() {
 		handleRequest(w, r, &cfg)
 	})
 
-	log.Println("starting puffy on " + cfg.Host + ":" + strconv.Itoa(cfg.Port))
+	log.Println("starting puffy on", cfg.Host + ":" + strconv.Itoa(cfg.Port))
 	err := http.ListenAndServe(cfg.Host+":"+strconv.Itoa(cfg.Port), mux)
 	if err != nil {
 		log.Fatal(err)
