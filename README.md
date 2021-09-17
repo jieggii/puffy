@@ -13,7 +13,7 @@ Simply run `install.sh` script to install puffy. The script will:
 ## Uninstallation
 Puffy can be easily uninstalled using `uninstall.sh` script. Just run it.
 It will remove all puffy files, including its config and systemd service file 
-if you agree in interactive prompt
+if you agree in the interactive prompt
 
 ## Usage
 ### Step 1: Configuration
@@ -37,6 +37,21 @@ secret = "qwerty12345"
 exec = "/home/user/scripts/script.sh"
 ```
 
+Root fields:
+| Field      | Type     | Default value | Descripton                                      |
+| ---------- | -------- | ------------- | ----------------------------------------------- |
+| `host`     | optional | `0.0.0.0`     | Host puffy will listen to                       |
+| `port`     | required | (no default)  | Port puffy will listen to                       |
+| `endpoint` | optional | `/`           | Endpoint to which events will be sent by GitHub |
+
+Repository fields:
+| Field    | Type     | Description                                                             |
+| -------- | -------- | ----------------------------------------------------------------------- |
+| `name`   | required | Repository name in format `<username>/<reponame>`, e.g: `jieggii/puffy` |
+| `secret` | required | Webhook secret which is set in repository settings                      |
+| `exec`   | required | Command to be executed when push event is received. It is recommended to always indicate full path to the binary. E.g: `/usr/bin/bash /home/user/repo/on-push.sh` |
+
+
 Edit fields and add your repositories.
 
 _Note: you need to restart puffy after every configuration edits._
@@ -47,13 +62,16 @@ but nothing prevents you from running it in the way you want.
 For example directly, just using `puffy` command. Anyway, I will show how to use it with systemd.
 
 At first start it:
+
 `sudo systemctl start puffy.service`
 
 You can check its status if you want to make sure everything's fine:
+
 `systemctl status puffy.service`
 
 And after that, you would probably like to `enable` it, so that it starts with the start of the server
+
 `sudo systemctl enable puffy.service`
 
-## Todo
+## TODO
 - [ ] Add payload signature validation
