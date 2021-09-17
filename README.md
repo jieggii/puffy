@@ -1,8 +1,8 @@
-# (WIP) puffy
-Puffy is an extremely simple unixway GitHub webhook listener and handler for push events
+# puffy
+Puffy is an extremely simple unixway GitHub webhook listener for push events which is supposed to be run as systemd service
 
 ## Todo
-- [ ] Add payload signature validation (WIP)
+- [ ] Add payload signature validation
 
 ## Dependencies
 * golang
@@ -36,7 +36,7 @@ exec = "/home/user/scripts/script.sh"
 ```
 
 Edit fields as you want! A new repository can be added under `[[repo]]` line.
-Please be sure to indicate `name`, `secret` and `exec` fields.
+Please be sure to indicate `name`, `secret` and `exec` fields. They are required.
 
 _Also note, that after every configuration edits you need to restart puffy_
 
@@ -60,5 +60,3 @@ And after that, you probably would like to `enable` it, so that it starts with t
 
 ### 3: Uninstalling
 puffy can be easily uninstalled via `uninstall.sh` script. Just run it.
-
-...
