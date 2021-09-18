@@ -59,7 +59,7 @@ _Note: you need to restart puffy after every configuration edits._
 ### Step 2: Running with systemd
 When puffy is set up, it's time to use it! Puffy is supposed to be used with systemd, 
 but nothing prevents you from running it in the way you want. 
-For example directly, just using `puffy` command. Anyway, I will show how to use it with systemd.
+Directly for example, just using the `puffy` command. Anyway, I will show how to use it with systemd.
 
 At first start it:
 
