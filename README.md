@@ -34,7 +34,7 @@ exec = "/usr/bin/touch /root/hewwo-cutie^^"
 [[repo]]
 name = "username/repo-name"
 secret = "qwerty12345"
-exec = "/home/user/scripts/script.sh"
+exec = "/usr/bin/sh /home/user/scripts/script.sh"
 ```
 
 Root fields:
