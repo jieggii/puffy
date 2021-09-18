@@ -49,7 +49,7 @@ Repository fields:
 | -------- | -------- | ----------------------------------------------------------------------- |
 | `name`   | required | Repository name in format `<username>/<reponame>`, e.g: `jieggii/puffy` |
 | `secret` | required | Webhook secret which is set in repository settings                      |
-| `exec`   | required | Command to be executed when push event is received. It is recommended to always indicate full path to the binary. E.g: `/usr/bin/bash /home/user/repo/on-push.sh` |
+| `exec`   | required | Command to be executed when push event is received. It is always recommended to indicate the full path to the binary. E.g: `/usr/bin/bash /home/user/repo/on-push.sh` |
 
 
 Edit fields and add your repositories.
