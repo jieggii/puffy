@@ -42,7 +42,7 @@ Root fields:
 | ---------- | -------- | ------------- | ----------------------------------------------- |
 | `host`     | optional | `0.0.0.0`     | Host puffy will listen to                       |
 | `port`     | required | (no default)  | Port puffy will listen to                       |
-| `endpoint` | optional | `/`           | Endpoint to which events will be sent by GitHub |
+| `endpoint` | optional | `/`           | Endpoint puffy will listen to                   |
 
 Repository fields:
 | Field    | Type     | Description                                                             |
