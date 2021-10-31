@@ -4,10 +4,12 @@ endpoint = "/"  # optional
 
 [[repo]]
 name = "username/repo-name"
-secret = "my super secret"
-exec = "/usr/bin/touch /root/hewwo-cutie^^"
+exec = "touch file1"
 
 [[repo]]
 name = "username/repo-name"
-secret = "qwerty12345"
-exec = "/usr/bin/sh /home/user/scripts/script.sh"
+exec = "sh /home/user/scripts/script.sh"
+
+[[repo]]
+name = "jieggii/puffy"
+exec = "bash /home/jieggii/scripts/alert.sh"
