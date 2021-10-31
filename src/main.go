@@ -11,11 +11,11 @@ import (
 	"strings"
 )
 
-func handleRequest(w http.ResponseWriter, r *http.Request, cfg *config.Config) {
+func handleRequest(writer http.ResponseWriter, request *http.Request, cfg *config.Config) {
 	var event json_objects.Event
-	err := json.NewDecoder(r.Body).Decode(&event)
+	err := json.NewDecoder(request.Body).Decode(&event)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		http.Error(writer, err.Error(), http.StatusBadRequest)
 		return
 	}
 	knownRepo := false
@@ -41,6 +41,7 @@ func handleRequest(w http.ResponseWriter, r *http.Request, cfg *config.Config) {
 
 func main() {
 	cfg := config.LoadConfig()
+
 	var repoNames []string
 	for _, repo := range cfg.Repos {
 		repoNames = append(repoNames, repo.Name)
@@ -48,8 +49,8 @@ func main() {
 	log.Println("Serving GitHub repositories:", strings.Join(repoNames[:], ", "))
 
 	mux := http.NewServeMux()
-	mux.HandleFunc(cfg.Endpoint, func(w http.ResponseWriter, r *http.Request) {
-		handleRequest(w, r, &cfg)
+	mux.HandleFunc(cfg.Endpoint, func(writer http.ResponseWriter, request *http.Request) {
+		handleRequest(writer, request, &cfg)
 	})
 
 	addr := cfg.Host + ":" + strconv.Itoa(cfg.Port)
