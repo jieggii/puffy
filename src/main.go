@@ -28,14 +28,14 @@ func handleRequest(w http.ResponseWriter, r *http.Request, cfg *config.Config) {
 			if err != nil {
 				log.Println(err)
 			} else {
-				log.Println("got new push event from "+repo.Name+". Started process '"+repo.Exec+"'. PID:", pid)
+				log.Println("Got new push event from "+repo.Name+". Started process '"+repo.Exec+"'. PID:", pid)
 			}
 			knownRepo = true
 			break
 		}
 	}
 	if !knownRepo {
-		log.Println("warning: got push event from unknown repo:", event.Repository.FullName)
+		log.Println("Warning: got push event from unknown repo:", event.Repository.FullName)
 	}
 }
 
