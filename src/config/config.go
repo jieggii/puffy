@@ -8,9 +8,9 @@ import (
 )
 
 type Repo struct {
-	Name   string
-	Secret string
-	Exec   string
+	Name string
+	//Secret string
+	Exec string
 }
 
 type Config struct {
@@ -24,49 +24,44 @@ func validateConfig(meta toml.MetaData, config *Config) {
 	keys := meta.Keys()
 	undecoded := meta.Undecoded()
 	if len(undecoded) != 0 {
-		log.Fatal("error: unexpected", undecoded, "keys in the config file")
+		log.Fatal("Fatal: unexpected", undecoded, "keys in the config file")
 	}
 	if !utils.KeyIsPresent("port", keys) {
-		log.Fatal("error: required field \"port\" is not set in the config file")
+		log.Fatal("Fatal: required field 'port' is not set in the config file")
 	}
 	if len(config.Repos) == 0 {
-		log.Fatal("error: no repositories specified in the config file")
+		log.Fatal("Fatal: no repositories specified in the config file")
 	}
 	for i, repo := range config.Repos {
 		if repo.Name == "" {
-			log.Fatal("error: missing required field \"name\" in the repo #" + strconv.Itoa(i+1) + " in the config file")
+			log.Fatal("Fatal: missing required field 'name' in the repo #" + strconv.Itoa(i+1) + " in the config file")
 		}
 		if repo.Exec == "" {
-			log.Fatal("error: missing required field \"exec\" in repo with name \"" + repo.Name + "\" in the config file")
+			log.Fatal("Fatal: missing required field 'exec' in repo with name '" + repo.Name + "' in the config file")
 		}
-		if repo.Secret == "" {
-			log.Fatal("error: missing required secret in repo with name \"" + repo.Name + "\" in the config file")
-		}
+		//if repo.Secret == "" {
+		//	log.Fatal("Fatal: missing required secret in repo with name '" + repo.Name + "' in the config file")
+		//}
 	}
 }
 
 func prepareConfig(meta toml.MetaData, config *Config) *Config {
 	keys := meta.Keys()
 	if !utils.KeyIsPresent("host", keys) {
-		log.Println("setting host to \"0.0.0.0\" as it is not specified in the config file")
+		log.Println("Setting host to '0.0.0.0' as it is not specified in the config file")
 		config.Host = "0.0.0.0"
 	}
 	if !utils.KeyIsPresent("endpoint", keys) {
-		log.Println("setting endpoint to \"/\" as it is not specified in the config file")
+		log.Println("Setting endpoint to '/' as it is not specified in the config file")
 		config.Endpoint = "/"
 	}
-	var repoNames []string
-	for _, repo := range config.Repos {
-		repoNames = append(repoNames, repo.Name)
-	}
-	log.Println("serving repositories:", repoNames)
 	return config
 }
 
 func LoadConfig() Config {
 	var config Config
 	configPath := utils.GetEnv("PUFFY_CONFIG_PATH", "/etc/puffy/config.toml")
-	log.Println("using config:", configPath)
+	log.Println("Using config:", configPath)
 
 	meta, err := toml.DecodeFile(
 		configPath,

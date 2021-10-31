@@ -1,8 +1,9 @@
 package utils
 
 import (
-	"fmt"
+	"errors"
 	"github.com/BurntSushi/toml"
+	"log"
 	"os"
 	"os/exec"
 	"strings"
@@ -26,26 +27,18 @@ func GetEnv(key string, fallback string) string {
 	}
 }
 
-func Execute(command string) int {
+func Execute(command string) (int, error) {
 	tokens := strings.Split(command, " ")
-
-	var cmd *exec.Cmd
-	if len(tokens) == 1 {
-		cmd = exec.Command(tokens[0])
-	} else {
-		cmd = exec.Command(tokens[0], tokens[1:]...)
-	}
-
+	cmd := exec.Command(tokens[0], tokens[1:]...)
 	err := cmd.Start()
 	if err != nil {
-		return 0
+		return 0, errors.New("Error: could not run command '" + command + "'")
 	}
-	pid := cmd.Process.Pid
 	go func() {
 		err = cmd.Wait()
 		if err != nil {
-			log.Println("command \"" + command + "\" finished with error:", err)
+			log.Println("Error: command '"+command+"' finished with error:", err)
 		}
 	}()
-	return pid
+	return cmd.Process.Pid, nil
 }

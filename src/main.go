@@ -8,6 +8,7 @@ import (
 	"puffy/src/json_objects"
 	"puffy/src/utils"
 	"strconv"
+	"strings"
 )
 
 func handleRequest(w http.ResponseWriter, r *http.Request, cfg *config.Config) {
@@ -22,8 +23,13 @@ func handleRequest(w http.ResponseWriter, r *http.Request, cfg *config.Config) {
 		if repo.Name == event.Repository.FullName {
 			// todo: validate payload signature
 			// (https://docs.github.com/en/developers/webhooks-and-events/webhooks/securing-your-webhooks)
-			pid := utils.Execute(repo.Exec)
-			log.Println("got push event from", repo.Name + ". Starting process \"" + repo.Exec + "\". PID:", pid)
+			command := repo.Exec
+			pid, err := utils.Execute(command)
+			if err != nil {
+				log.Println(err)
+			} else {
+				log.Println("got new push event from "+repo.Name+". Started process '"+repo.Exec+"'. PID:", pid)
+			}
 			knownRepo = true
 			break
 		}
@@ -35,14 +41,20 @@ func handleRequest(w http.ResponseWriter, r *http.Request, cfg *config.Config) {
 
 func main() {
 	cfg := config.LoadConfig()
+	var repoNames []string
+	for _, repo := range cfg.Repos {
+		repoNames = append(repoNames, repo.Name)
+	}
+	log.Println("Serving GitHub repositories:", strings.Join(repoNames[:], ", "))
 
 	mux := http.NewServeMux()
 	mux.HandleFunc(cfg.Endpoint, func(w http.ResponseWriter, r *http.Request) {
 		handleRequest(w, r, &cfg)
 	})
 
-	log.Println("starting puffy on", cfg.Host + ":" + strconv.Itoa(cfg.Port))
-	err := http.ListenAndServe(cfg.Host+":"+strconv.Itoa(cfg.Port), mux)
+	addr := cfg.Host + ":" + strconv.Itoa(cfg.Port)
+	log.Println("Started puffy at " + addr + cfg.Endpoint)
+	err := http.ListenAndServe(addr, mux)
 	if err != nil {
 		log.Fatal(err)
 	}
