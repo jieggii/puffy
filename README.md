@@ -10,9 +10,9 @@ Puffy is an extremely simple unixway GitHub webhook listener for push events whi
 make install
 ```
 This make command will:
-* Build puffy binary and move it to `/usr/bin/puffy`.
-* Create `puffy` directory at `/etc/` and copy its config file to it.
-* Copy `puffy.service` to `/etc/systemd/system/` directory.
+* Build puffy binary and move it to `/usr/bin/puffy`
+* Create `puffy` directory at `/etc/` and copy its config file to it
+* Copy `puffy.service` to `/etc/systemd/system/` directory
 
 ## Uninstallation
 ```shell
