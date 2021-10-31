@@ -2,6 +2,8 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
+	"fmt"
 	"log"
 	"net/http"
 	"puffy/src/config"
@@ -40,6 +42,15 @@ func handleRequest(writer http.ResponseWriter, request *http.Request, cfg *confi
 }
 
 func main() {
+	displayVersion := flag.Bool("version", false, "display puffy version and exit")
+
+	flag.Parse()
+
+	if *displayVersion == true {
+		fmt.Println("puffy version 0.0.1")
+		return
+	}
+
 	cfg := config.LoadConfig()
 
 	var repoNames []string
