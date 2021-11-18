@@ -21,7 +21,7 @@ make uninstall
 All puffy files, including its config directory (`/etc/puffy`) and systemd service file will be removed.
 
 ## Usage
-### Step 1: Configuration
+### Step 1: configuration
 You need to configure puffy at first. Configuration file is in `TOML` format, so 
 primarily get acquainted with [toml specification](https://github.com/kezhuw/toml-spec).
 
@@ -45,23 +45,23 @@ exec = "bash /home/jieggii/scripts/alert.sh"
 ```
 
 Root fields:
-| Field      | Type     | Default value | Description                                      |
-| ---------- | -------- | ------------- | ----------------------------------------------- |
-| `host`     | optional | `0.0.0.0`     | Host puffy will listen to                       |
-| `port`     | required | (no default)  | Port puffy will listen to                       |
-| `endpoint` | optional | `/`           | Endpoint puffy will listen to                   |
+| Field      | Type     | Default value | Description                        |
+| ---------- | -------- | ------------- | ---------------------------------- |
+| `host`     | optional | `0.0.0.0`     | Host to listen to                  |
+| `port`     | required | (no default)  | Port to listen to                  |
+| `endpoint` | optional | `/`           | Endpoint to listen to              |
 
 Repository fields:
-| Field    | Type     | Description                                                             |
-| -------- | -------- | ----------------------------------------------------------------------- |
-| `name`   | required | Repository name in format `<username>/<reponame>`, e.g: `jieggii/puffy` |
+| Field    | Type     | Description                                                                                |
+| -------- | -------- | ------------------------------------------------------------------------------------------ |
+| `name`   | required | Repository name in format `<username>/<reponame>`, e.g: `jieggii/puffy`                    |
 | `exec`   | required | Command to be executed when push event is received, e.g: `bash /home/user/repo/on-push.sh` |
 
 Edit fields and add your repositories.
 
 _Note: you need to restart puffy after every configuration file edits._
 
-### Step 2: Running with systemd
+### Step 2: running with systemd
 When puffy is set up, it's time to run it! Puffy is supposed to be used with systemd, 
 but nothing prevents you from running it in the way you want. 
 Directly for example, just using the `puffy` command. Anyway, I will show how to use it with systemd.
@@ -74,7 +74,7 @@ You can check its status if you want to make sure everything's fine:
 
 `systemctl status puffy.service`
 
-And after that, you would probably like to `enable` it to make puffy start right after boot:
+And after that you would probably like to `enable` it to make puffy start right after boot:
 
 `sudo systemctl enable puffy.service`
 
