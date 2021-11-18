@@ -47,7 +47,7 @@ func main() {
 	flag.Parse()
 
 	if *displayVersion == true {
-		fmt.Println("puffy version 0.0.1")
+		fmt.Println("puffy version 1.0.0")
 		return
 	}
 
