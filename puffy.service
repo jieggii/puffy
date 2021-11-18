@@ -8,8 +8,5 @@ Environment="PUFFY_CONFIG_PATH=/etc/puffy/config.toml"
 ExecStart=/usr/bin/puffy
 User=root
 
-# Useful during debugging; remove it once the service is working
-StandardOutput=console
-
 [Install]
 WantedBy=multi-user.target
