@@ -23,7 +23,7 @@ All puffy files, including its config directory (`/etc/puffy`) and systemd servi
 ## Usage
 ### Step 1: Configuring
 You need to configure puffy at first. Configuration file is in `TOML` format, so 
-primarily get acquainted with [toml specification](https://toml.io/en/v1.0.0).
+primarily get acquainted with [toml specification](https://toml.io/en/v1.0.0) (especially pay attention to [array of tables](https://toml.io/en/v1.0.0#array-of-tables)).
 
 Then open `/etc/puffy/config.toml` (this is where puffy config file is located by default) with your favourite text editor:
 ```toml
