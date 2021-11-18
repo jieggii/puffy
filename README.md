@@ -21,7 +21,7 @@ make uninstall
 All puffy files, including its config directory (`/etc/puffy`) and systemd service file will be removed.
 
 ## Usage
-### Step 1: configuration
+### Step 1: Configuring
 You need to configure puffy at first. Configuration file is in `TOML` format, so 
 primarily get acquainted with [toml specification](https://github.com/kezhuw/toml-spec).
 
@@ -61,7 +61,7 @@ Edit fields and add your repositories.
 
 _Note: you need to restart puffy after every configuration file edits._
 
-### Step 2: running with systemd
+### Step 2: Running
 When puffy is set up, it's time to run it! Puffy is supposed to be used with systemd, 
 but nothing prevents you from running it in the way you want. 
 Directly for example, just using the `puffy` command. Anyway, I will show how to use it with systemd.
