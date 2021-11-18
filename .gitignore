@@ -9,4 +9,4 @@ go.sum
 /vendor/
 /Godeps/
 .idea/
-main
+puffy
