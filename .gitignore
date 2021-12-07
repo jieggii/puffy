@@ -1,12 +1,6 @@
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
 go.sum
-*.test
-*.out
 /vendor/
 /Godeps/
-.idea/
-puffy
+/.vscode/
+/.idea/
+/bin/
