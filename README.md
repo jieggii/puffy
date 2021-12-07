@@ -1,5 +1,5 @@
 # puffy
-Puffy is an extremely simple unixway GitHub webhook listener for push events which is supposed to be run as systemd service.
+Puffy is an extremely simple GitHub webhook listener for push events which is supposed to be run as systemd service.
 
 ## Dependencies
 * golang
@@ -80,3 +80,4 @@ And after that you would probably like to `enable` it to make puffy start right 
 
 ## TODO
 - [ ] Add payload signature validation
+- [ ] Write webhook setup guide
