@@ -1,15 +1,15 @@
 package config
 
 import (
-	"github.com/BurntSushi/toml"
 	"log"
-	"puffy/src/utils"
+	"puffy/cmd/utils"
 	"strconv"
+
+	"github.com/BurntSushi/toml"
 )
 
 type Repo struct {
 	Name string
-	//Secret string
 	Exec string
 }
 
@@ -39,9 +39,6 @@ func validateConfig(meta toml.MetaData, config *Config) {
 		if repo.Exec == "" {
 			log.Fatal("Fatal: missing required field 'exec' in repo with name '" + repo.Name + "' in the config file")
 		}
-		//if repo.Secret == "" {
-		//	log.Fatal("Fatal: missing required secret in repo with name '" + repo.Name + "' in the config file")
-		//}
 	}
 }
 
@@ -58,11 +55,9 @@ func prepareConfig(meta toml.MetaData, config *Config) *Config {
 	return config
 }
 
-func LoadConfig() Config {
+func LoadConfig(configPath string) *Config {
 	var config Config
-	configPath := utils.GetEnv("PUFFY_CONFIG_PATH", "/etc/puffy/config.toml")
 	log.Println("Using config:", configPath)
-
 	meta, err := toml.DecodeFile(
 		configPath,
 		&config,
@@ -70,9 +65,7 @@ func LoadConfig() Config {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	prepareConfig(meta, &config)
 	validateConfig(meta, &config)
-
-	return config
+	return &config
 }
