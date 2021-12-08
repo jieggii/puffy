@@ -1,5 +1,6 @@
 # puffy
-**Puffy** is an extremely simple GitHub webhook listener for push events which is supposed to be run as systemd service.
+**puffy** is an extremely simple GitHub webhook listener for push events 
+which is supposed to be run as **systemd** service.
 
 ## Dependencies
 * golang
@@ -28,10 +29,10 @@ All **puffy** data (its binary - `/usr/bin/puffy`, config directory - `/etc/puff
 
 ## Usage
 ### Step 1: Configuring
-You need to configure puffy at first. Configuration file is in `TOML` format, so 
+You need to configure **puffy** at first. Configuration file is in **TOML** format, so 
 primarily get acquainted with [toml specification](https://toml.io/en/v1.0.0) (especially pay attention to [array of tables](https://toml.io/en/v1.0.0#array-of-tables)).
 
-Then open `/etc/puffy/config.toml` (this is where puffy config file is located by default) with your favourite text editor:
+Then open `/etc/puffy/config.toml` (this is where **puffy** config file is located by default) with your favourite text editor:
 ```toml
 host = "0.0.0.0"  # optional
 port = 8080
@@ -68,11 +69,11 @@ Edit fields and add your repositories.
 _Note: you need to restart puffy after every configuration file edits._
 
 ### Step 2: Running
-When puffy is set up, it's time to run it! Puffy is supposed to be used with systemd, 
+When **puffy** is set up, it's time to run it! Puffy is supposed to be used with systemd, 
 but nothing prevents you from running it in the way you want. 
 Directly for example, just using the `puffy` command. Anyway, I will show how to use it with systemd.
 
-At first start puffy service:
+At first start **puffy** service:
 
 `sudo systemctl start puffy.service`
 
