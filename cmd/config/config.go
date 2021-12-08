@@ -1,36 +1,64 @@
 package config
 
 import (
+	"errors"
 	"log"
-	"puffy/cmd/utils"
+	"os"
 	"strconv"
 
 	"github.com/BurntSushi/toml"
 )
 
 type Repo struct {
-	Name string
-	Exec string
+	Name    string
+	Workdir string
+	Shell   string
+	Exec    string
 }
 
 type Config struct {
 	Host     string
 	Port     int
 	Endpoint string
-	Repos    []Repo `toml:"repo"`
+	Workdir  string
+	Shell    string
+	Repos    []Repo
+}
+
+func KeyIsPresent(name string, keys []toml.Key) bool {
+	for _, key := range keys {
+		if key.String() == name {
+			return true
+		}
+	}
+	return false
+}
+
+func pathExists(path string) bool {
+	if _, err := os.Stat(path); errors.Is(err, os.ErrNotExist) {
+		return false
+	} else {
+		return true
+	}
 }
 
 func validateConfig(meta toml.MetaData, config *Config) {
 	keys := meta.Keys()
 	undecoded := meta.Undecoded()
 	if len(undecoded) != 0 {
-		log.Fatal("Fatal: unexpected", undecoded, "keys in the config file")
+		log.Fatal("Fatal: unexpected ", undecoded, " keys in the config file")
 	}
-	if !utils.KeyIsPresent("port", keys) {
+	if !KeyIsPresent("port", keys) {
 		log.Fatal("Fatal: required field 'port' is not set in the config file")
 	}
 	if len(config.Repos) == 0 {
 		log.Fatal("Fatal: no repositories specified in the config file")
+	}
+	if !pathExists(config.Shell) {
+		log.Fatal("Fatal: 'shell' specified in the config file (" + config.Shell + ") does not exist")
+	}
+	if !pathExists(config.Workdir) {
+		log.Fatal("Fatal: 'workdir' specified in the config file )" + config.Workdir + ") does not exist")
 	}
 	for i, repo := range config.Repos {
 		if repo.Name == "" {
@@ -39,18 +67,33 @@ func validateConfig(meta toml.MetaData, config *Config) {
 		if repo.Exec == "" {
 			log.Fatal("Fatal: missing required field 'exec' in repo with name '" + repo.Name + "' in the config file")
 		}
+		if repo.Workdir != "" && !pathExists(repo.Workdir) {
+			log.Fatal("Fatal: 'workdir' specified in the config file (" + repo.Workdir + ") of repo " + repo.Name + " does not exist")
+		}
+		if repo.Shell != "" && !pathExists(repo.Shell) {
+			log.Fatal("Fatal: 'shell' specified in the config file (" + repo.Shell + ") of repo " + repo.Name + " does not exist")
+		}
 	}
 }
 
 func prepareConfig(meta toml.MetaData, config *Config) *Config {
 	keys := meta.Keys()
-	if !utils.KeyIsPresent("host", keys) {
-		log.Println("Setting host to '0.0.0.0' as it is not specified in the config file")
+
+	if !KeyIsPresent("host", keys) {
+		log.Println("Setting 'host' to '0.0.0.0' as it is not specified in the config")
 		config.Host = "0.0.0.0"
 	}
-	if !utils.KeyIsPresent("endpoint", keys) {
-		log.Println("Setting endpoint to '/' as it is not specified in the config file")
+	if !KeyIsPresent("endpoint", keys) {
+		log.Println("Setting 'endpoint' to '/' as it is not specified in the config")
 		config.Endpoint = "/"
+	}
+	if !KeyIsPresent("workdir", keys) {
+		log.Println("Setting 'workdir' to '/' as it is not specified in the config")
+		config.Workdir = "/"
+	}
+	if !KeyIsPresent("shell", keys) {
+		log.Println("Setting 'shell' to '/usr/bin/sh' as it is not specified in the config")
+		config.Shell = "/usr/bin/sh"
 	}
 	return config
 }

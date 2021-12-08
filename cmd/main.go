@@ -25,6 +25,22 @@ func resloveRepo(repoName string, cfg *config.Config) *config.Repo {
 	return nil
 }
 
+func selectShell(repo *config.Repo, cfg *config.Config) string {
+	if repo.Shell == "" {
+		return cfg.Shell
+	} else {
+		return repo.Shell
+	}
+}
+
+func selectWorkdir(repo *config.Repo, cfg *config.Config) string {
+	if repo.Workdir == "" {
+		return cfg.Workdir
+	} else {
+		return repo.Workdir
+	}
+}
+
 func handleRequest(w http.ResponseWriter, r *http.Request, cfg *config.Config) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -67,7 +83,10 @@ func handleRequest(w http.ResponseWriter, r *http.Request, cfg *config.Config) {
 	w.Write([]byte("The event will be handled"))
 	log.Println("Received push event from " + repo.Name)
 
-	strPID, err := utils.ExecuteCommand(repo.Exec, repo.Name)
+	shell := selectShell(repo, cfg)
+	workdir := selectWorkdir(repo, cfg)
+
+	strPID, err := utils.ExecuteCommand(shell, workdir, repo.Exec, repo.Name)
 	if err != nil {
 		strError := err.Error()
 		http.Error(w, strError, http.StatusInternalServerError)
@@ -92,7 +111,7 @@ func startServer(c *cli.Context) error {
 	log.Println("Serving GitHub repositories:", strings.Join(repoNames[:], ", "))
 
 	addr := cfg.Host + ":" + strconv.Itoa(cfg.Port)
-	log.Println("Starting puffy at " + addr + cfg.Endpoint)
+	log.Println("Started puffy at " + addr + cfg.Endpoint)
 
 	mux := http.NewServeMux()
 	mux.HandleFunc(cfg.Endpoint, func(w http.ResponseWriter, r *http.Request) {

@@ -1,24 +1,30 @@
 # puffy
-Puffy is an extremely simple GitHub webhook listener for push events which is supposed to be run as systemd service.
+**Puffy** is an extremely simple GitHub webhook listener for push events which is supposed to be run as systemd service.
 
 ## Dependencies
 * golang
 * make
 
 ## Installation
+The program can be easily installed using a single **make** command:
+
 ```shell
 make install
 ```
-This make command will:
+
+This command will:
 * Build puffy binary and move it to `/usr/bin/puffy`
-* Create `puffy` directory at `/etc/` and copy its config file to it
+* Create `/etc/puffy/` directory and copy [example puffy config file]() to it
 * Copy `puffy.service` to `/etc/systemd/system/` directory
 
 ## Uninstallation
+To uninstall **puffy** simply run:
+
 ```shell
 make uninstall
 ```
-All puffy files, including its config directory (`/etc/puffy`) and systemd service file will be removed.
+
+All **puffy** data (its binary - `/usr/bin/puffy`, config directory - `/etc/puffy/` and systemd service file - `/etc/systemd/system/puffy.service`) will be removed.
 
 ## Usage
 ### Step 1: Configuring
