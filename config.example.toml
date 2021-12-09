@@ -24,7 +24,7 @@ name = "username/repo-name"
 workdir = "/home/username/repo-name/"
 exec = "git pull"
 
-[[repos]
+[[repos]]
 name = "username/website"
 workdir = "/home/username/repos/website/"
 exec = "bash scripts/on-push.bash"
