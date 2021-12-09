@@ -14,8 +14,8 @@ make install
 ```
 
 It will:
-* Build puffy binary and move it to `/usr/bin/puffy`
-* Create `/etc/puffy/` directory and copy [example (default) puffy config file]() to it
+* Build **puffy** binary and move it to `/usr/bin/puffy`
+* Create `/etc/puffy/` directory and copy [example (default) **puffy** config file]() to it
 * Copy `puffy.service` to `/etc/systemd/system/` directory
 
 ## Uninstallation
