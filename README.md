@@ -107,7 +107,7 @@ it's time to configure your GitHub repository.
 ![pic1](https://imgur.com/To3W0yT.jpg)
 
 2. Press **Add webhook** and confirm your password.
-3. Fill fields: Provide **payload URL**, set **Content type** to `application/json` and press **Add webhook**.
+3. Fill fields: Provide **payload URL** in `http://<hostname>:<port>/<endpoint>` format, where `<hostname>` is your domain name or IP address, `<port>` and `<endpoint>` are port and endpooint **puffy** is listening to; set **Content type** to `application/json` and press **Add webhook**.
 ![pic2](https://imgur.com/tKDBryR.jpg)
 
 **Done!** Webhook is configured. Now, to check if everythng works fine, 
