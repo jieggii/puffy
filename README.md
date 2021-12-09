@@ -31,9 +31,9 @@ All deletions will require your confirmation.
 
 ## Usage guide
 Contents:
-* [Step 1: configuring puffy]()
-* [Step 2: running puffy]()
-* [Step3: seting-up GitHub repository]()
+* [Step 1: configuring puffy](https://github.com/jieggii/puffy/tree/dev#step-1-configuring-puffy)
+* [Step 2: running puffy](https://github.com/jieggii/puffy/tree/dev#step-2-running-puffy)
+* [Step 3: seting-up GitHub repository](https://github.com/jieggii/puffy/tree/dev#step-3-setting-up-github-repository)
 
 ### Step 1: configuring puffy
 You will need to configure **puffy** at first. Configuration file is in **TOML** format, so 
@@ -100,7 +100,20 @@ And after that you would probably like to *enable* it to make **puffy** always s
 `sudo systemctl enable puffy.service`
 
 ### Step 3: setting up your GitHub repository
-Now, when **puffy** is configured, running on your servier and waiting for push events it's time to configure your GitHub repository.
+Now, when **puffy** is configured, running on your servier and waiting for push events,
+it's time to configure your GitHub repository.
+
+1. Go to repository **settings** and choose **Webhooks** meny entry.
+![pic1](https://imgur.com/To3W0yT.jpg)
+
+2. Press **Add webhook** and confirm your password.
+3. Fill fields: Provide **payload URL**, set **Content type** to `application/json` and press **Add webhook**.
+![pic2](https://imgur.com/tKDBryR.jpg)
+
+**Done!** Webhook is configured. Now, to check if everythng works fine, 
+click on your webhook, then go to **Recent deliveries** tab and click on the first delivery. 
+It should look like this (with response code **200** and `pong!` phrase):
+![pic3](https://imgur.com/inL7aXG.jpg)
 
 ## TODO
 - [ ] Add payload signature validation
