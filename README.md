@@ -69,9 +69,8 @@ And after that you would probably like to *enable* it to make **puffy** always s
 
 `sudo systemctl enable puffy.service`
 
-
-# Step 3: setting up your GitHub repository
-Now, when *puffy* is configured, running on your servier and waiting for push events it's time to configure your GitHub repository.
+### Step 3: setting up your GitHub repository
+Now, when **puffy** is configured, running on your servier and waiting for push events it's time to configure your GitHub repository.
 
 ## TODO
 - [ ] Add payload signature validation
