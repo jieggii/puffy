@@ -15,7 +15,7 @@ make install
 
 It will:
 * Build **puffy** binary and move it to `/usr/bin/puffy`
-* Create `/etc/puffy/` directory and copy [example (default) **puffy** config file]() to it
+* Create `/etc/puffy/` directory and copy [example (default) puffy config file]() to it
 * Copy `puffy.service` to `/etc/systemd/system/` directory
 
 ## Uninstallation
@@ -31,18 +31,48 @@ All deletions will require your confirmation.
 
 ## Usage guide
 Contents:
-* [Step 1: configuring **puffy**]()
-* [Step 2: running **puffy**]()
-* [Step3: seting-up **GitHub repository**]()
+* [Step 1: configuring puffy]()
+* [Step 2: running puffy]()
+* [Step3: seting-up GitHub repository]()
 
 ### Step 1: configuring puffy
 You will need to configure **puffy** at first. Configuration file is in **TOML** format, so 
 primarily get acquainted with [toml specification](https://toml.io/en/v1.0.0) 
 (especially pay attention to [array of tables](https://toml.io/en/v1.0.0#array-of-tables)).
 
-Then open `/etc/puffy/config.toml` (this is where **puffy** config file is located by default) 
+Then open `/etc/puffy/config.toml` (this is where **puffy** config file is located by default)
 with your favourite text editor:
 ```toml
+host = "0.0.0.0"  # host to listen to (default: "0.0.0.0")
+port = 8080       # port to listen to
+endpoint = "/"    # endpoint to listen to (default: "/")
+
+# shell to use when running command from $repo.exec 
+shell = "/usr/bin/bash"  # default: "/usr/bin/sh"
+
+# workdir move to before executing command from $repo.exec
+workdir = "/"  # default: "/"
+
+[[repo]]  # full example
+name = "username/repo-name"            # name of the repository in <username>/<repo-name> format
+shell = "/usr/bin/fish"                # (optional) overwrites $shell for this repository
+workdir = "/home/username/repo-name/"  # (optional) overwrites $workdir for this repository
+exec = "./script.fish"                 # command to execute when push event is received
+
+[[repo]]  # the most simple example
+name = "username/repo-name"
+exec = "/home/username/scripts/alert.sh"
+
+# other examples
+[[repo]]  
+name = "username/repo-name"
+workdir = "/home/username/repo-name/"
+exec = "git pull"
+
+[[repo]]
+name = "username/website"
+workdir = "/home/username/repos/website/"
+exec = "bash scripts/on-push.bash"
 
 ```
 

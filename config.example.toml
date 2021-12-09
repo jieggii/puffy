@@ -1,6 +1,6 @@
 host = "0.0.0.0"  # host to listen to (default: "0.0.0.0")
-port = 8080  # port to listen to
-endpoint = "/"  # endpoint to listen to (default: "/")
+port = 8080       # port to listen to
+endpoint = "/"    # endpoint to listen to (default: "/")
 
 # shell to use when running command from $repo.exec 
 shell = "/usr/bin/bash"  # default: "/usr/bin/sh"
@@ -8,15 +8,20 @@ shell = "/usr/bin/bash"  # default: "/usr/bin/sh"
 # workdir move to before executing command from $repo.exec
 workdir = "/"  # default: "/"
 
-[[repo]]
-name = "username/repo-name"            # name of repository in <username>/<repo-name> format
+[[repo]]  # full example
+name = "username/repo-name"            # name of the repository in <username>/<repo-name> format
 shell = "/usr/bin/fish"                # (optional) overwrites $shell for this repository
 workdir = "/home/username/repo-name/"  # (optional) overwrites $workdir for this repository
-exec = "./script.fish"                 # command to execute when push event from this repo is received
+exec = "./script.fish"                 # command to execute when push event is received
 
-[[repo]]
-name = "jieggii/puffy"
-workdir = "/home/jieggii/repos/puffy/"
+[[repo]]  # the most simple example
+name = "username/repo-name"
+exec = "/home/username/scripts/alert.sh"
+
+# other examples
+[[repo]]  
+name = "username/repo-name"
+workdir = "/home/username/repo-name/"
 exec = "git pull"
 
 [[repo]]
