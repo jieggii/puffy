@@ -1,4 +1,4 @@
-package utils
+package main
 
 import (
 	"errors"
@@ -8,7 +8,32 @@ import (
 	"strconv"
 )
 
-func ExecuteCommand(shell string, workdir string, command string, repoName string) (string, error) {
+func resloveRepo(repoName string, cfg *Config) *Repo {
+	for _, repo := range cfg.Repos {
+		if repo.Name == repoName {
+			return &repo
+		}
+	}
+	return nil
+}
+
+func selectShell(repo *Repo, cfg *Config) string {
+	if repo.Shell == "" {
+		return cfg.Shell
+	} else {
+		return repo.Shell
+	}
+}
+
+func selectWorkdir(repo *Repo, cfg *Config) string {
+	if repo.Workdir == "" {
+		return cfg.Workdir
+	} else {
+		return repo.Workdir
+	}
+}
+
+func executeCommand(shell string, workdir string, command string, repoName string) (string, error) {
 	cmd := exec.Command(shell, "-c", "cd '"+workdir+"' && "+command)
 	err := cmd.Start()
 	if err != nil {
@@ -23,11 +48,10 @@ func ExecuteCommand(shell string, workdir string, command string, repoName strin
 			log.Println("Process for " + repoName + " (PID: " + strPID + ") was sucessfully finished")
 		}
 	}()
-
 	return strPID, nil
 }
 
-func GetIP(r *http.Request) string {
+func getIP(r *http.Request) string {
 	IPAddress := r.Header.Get("X-Real-Ip")
 	if IPAddress == "" {
 		IPAddress = r.Header.Get("X-Forwarded-For")

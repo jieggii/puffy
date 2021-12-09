@@ -1,4 +1,4 @@
-package config
+package main
 
 import (
 	"errors"
@@ -25,15 +25,6 @@ type Config struct {
 	Repos    []Repo
 }
 
-func KeyIsPresent(name string, keys []toml.Key) bool {
-	for _, key := range keys {
-		if key.String() == name {
-			return true
-		}
-	}
-	return false
-}
-
 func pathExists(path string) bool {
 	if _, err := os.Stat(path); errors.Is(err, os.ErrNotExist) {
 		return false
@@ -42,13 +33,30 @@ func pathExists(path string) bool {
 	}
 }
 
+func getRepoNames(cfg *Config) []string {
+	var repoNames []string
+	for _, repo := range cfg.Repos {
+		repoNames = append(repoNames, repo.Name)
+	}
+	return repoNames
+}
+
+func keyIsPresent(name string, keys []toml.Key) bool {
+	for _, key := range keys {
+		if key.String() == name {
+			return true
+		}
+	}
+	return false
+}
+
 func validateConfig(meta toml.MetaData, config *Config) {
 	keys := meta.Keys()
 	undecoded := meta.Undecoded()
 	if len(undecoded) != 0 {
 		log.Fatal("Fatal: unexpected ", undecoded, " keys in the config file")
 	}
-	if !KeyIsPresent("port", keys) {
+	if !keyIsPresent("port", keys) {
 		log.Fatal("Fatal: required field 'port' is not set in the config file")
 	}
 	if len(config.Repos) == 0 {
@@ -79,26 +87,26 @@ func validateConfig(meta toml.MetaData, config *Config) {
 func prepareConfig(meta toml.MetaData, config *Config) *Config {
 	keys := meta.Keys()
 
-	if !KeyIsPresent("host", keys) {
+	if !keyIsPresent("host", keys) {
 		log.Println("Setting 'host' to '0.0.0.0' as it is not specified in the config")
 		config.Host = "0.0.0.0"
 	}
-	if !KeyIsPresent("endpoint", keys) {
+	if !keyIsPresent("endpoint", keys) {
 		log.Println("Setting 'endpoint' to '/' as it is not specified in the config")
 		config.Endpoint = "/"
 	}
-	if !KeyIsPresent("workdir", keys) {
+	if !keyIsPresent("workdir", keys) {
 		log.Println("Setting 'workdir' to '/' as it is not specified in the config")
 		config.Workdir = "/"
 	}
-	if !KeyIsPresent("shell", keys) {
+	if !keyIsPresent("shell", keys) {
 		log.Println("Setting 'shell' to '/usr/bin/sh' as it is not specified in the config")
 		config.Shell = "/usr/bin/sh"
 	}
 	return config
 }
 
-func LoadConfig(configPath string) *Config {
+func loadConfig(configPath string) *Config {
 	var config Config
 	log.Println("Using config:", configPath)
 	meta, err := toml.DecodeFile(

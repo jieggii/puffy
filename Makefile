@@ -11,7 +11,7 @@ build:
 	@echo "[*] Building puffy..."
 	go mod vendor
 	mkdir -p bin/
-	go build -o bin/puffy cmd/main.go
+	go build -o bin/puffy cmd/*.go
 	@echo "[+] Puffy was built. Binary: ./bin/puffy"
 
 install: build

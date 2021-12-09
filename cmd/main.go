@@ -7,54 +7,26 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"puffy/cmd/config"
-	"puffy/cmd/json_objects"
-	"puffy/cmd/utils"
 	"strconv"
 	"strings"
 
 	"github.com/urfave/cli/v2"
 )
 
-func resloveRepo(repoName string, cfg *config.Config) *config.Repo {
-	for _, repo := range cfg.Repos {
-		if repo.Name == repoName {
-			return &repo
-		}
-	}
-	return nil
-}
-
-func selectShell(repo *config.Repo, cfg *config.Config) string {
-	if repo.Shell == "" {
-		return cfg.Shell
-	} else {
-		return repo.Shell
-	}
-}
-
-func selectWorkdir(repo *config.Repo, cfg *config.Config) string {
-	if repo.Workdir == "" {
-		return cfg.Workdir
-	} else {
-		return repo.Workdir
-	}
-}
-
-func handleRequest(w http.ResponseWriter, r *http.Request, cfg *config.Config) {
+func handleRequest(w http.ResponseWriter, r *http.Request, cfg *Config) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		http.Error(w, "Could not read request body", http.StatusBadRequest)
-		log.Println("Warning: could not read request body (request from " + utils.GetIP(r) + ")")
+		log.Println("Warning: could not read request body (request from " + getIP(r) + ")")
 		return
 	}
-	var event json_objects.Event
+	var event Event
 	event_decode_err := json.NewDecoder(
 		ioutil.NopCloser(bytes.NewReader(body)),
 	).Decode(&event)
 
 	if event_decode_err != nil {
-		var pingEvent json_objects.PingEvent
+		var pingEvent PingEvent
 		ping_event_decode_err := json.NewDecoder(
 			ioutil.NopCloser(bytes.NewReader(body)),
 		).Decode(&pingEvent)
@@ -62,7 +34,7 @@ func handleRequest(w http.ResponseWriter, r *http.Request, cfg *config.Config) {
 		if ping_event_decode_err != nil {
 			http.Error(w, "Invalid request body", http.StatusBadRequest)
 			log.Println(ping_event_decode_err)
-			log.Println("Warning: received invalid request body (request from " + utils.GetIP(r) + ")")
+			log.Println("Warning: received invalid request body (request from " + getIP(r) + ")")
 			return
 		}
 		if resloveRepo(pingEvent.Repository.FullName, cfg) == nil {
@@ -86,7 +58,7 @@ func handleRequest(w http.ResponseWriter, r *http.Request, cfg *config.Config) {
 	shell := selectShell(repo, cfg)
 	workdir := selectWorkdir(repo, cfg)
 
-	strPID, err := utils.ExecuteCommand(shell, workdir, repo.Exec, repo.Name)
+	strPID, err := executeCommand(shell, workdir, repo.Exec, repo.Name)
 	if err != nil {
 		strError := err.Error()
 		http.Error(w, strError, http.StatusInternalServerError)
@@ -96,16 +68,8 @@ func handleRequest(w http.ResponseWriter, r *http.Request, cfg *config.Config) {
 	log.Println("Spawned process for " + repo.Name + " (PID: " + strPID + ")")
 }
 
-func getRepoNames(cfg *config.Config) []string {
-	var repoNames []string
-	for _, repo := range cfg.Repos {
-		repoNames = append(repoNames, repo.Name)
-	}
-	return repoNames
-}
-
 func startServer(c *cli.Context) error {
-	cfg := config.LoadConfig(c.String("config"))
+	cfg := loadConfig(c.String("config"))
 
 	repoNames := getRepoNames(cfg)
 	log.Println("Serving GitHub repositories:", strings.Join(repoNames[:], ", "))
@@ -128,7 +92,7 @@ func main() {
 	}
 	app := &cli.App{
 		Name:    "puffy",
-		Version: "v1.1.0",
+		Version: "v2.0.0",
 		Usage:   "simple GitHub webhook listener for push events",
 		Flags: []cli.Flag{
 			&cli.PathFlag{
