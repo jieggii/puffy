@@ -8,23 +8,23 @@ shell = "/usr/bin/bash"  # default: "/usr/bin/sh"
 # workdir move to before executing command from $repo.exec
 workdir = "/"  # default: "/"
 
-[[repo]]  # full example
+[[repos]]  # full example
 name = "username/repo-name"            # name of the repository in <username>/<repo-name> format
 shell = "/usr/bin/fish"                # (optional) overwrites $shell for this repository
 workdir = "/home/username/repo-name/"  # (optional) overwrites $workdir for this repository
 exec = "./script.fish"                 # command to execute when push event is received
 
-[[repo]]  # the most simple example
+[[repos]]  # the most simple example
 name = "username/repo-name"
 exec = "/home/username/scripts/alert.sh"
 
 # other examples
-[[repo]]  
+[[repos]]  
 name = "username/repo-name"
 workdir = "/home/username/repo-name/"
 exec = "git pull"
 
-[[repo]]
+[[repos]
 name = "username/website"
 workdir = "/home/username/repos/website/"
 exec = "bash scripts/on-push.bash"

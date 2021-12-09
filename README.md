@@ -30,7 +30,6 @@ and **systemd** service file - `/etc/systemd/system/puffy.service`) will be remo
 All deletions will require your confirmation.
 
 ## Usage guide
-Contents:
 * [Step 1: configuring puffy](https://github.com/jieggii/puffy/tree/dev#step-1-configuring-puffy)
 * [Step 2: running puffy](https://github.com/jieggii/puffy/tree/dev#step-2-running-puffy)
 * [Step 3: seting-up GitHub repository](https://github.com/jieggii/puffy/tree/dev#step-3-setting-up-github-repository)
@@ -53,23 +52,23 @@ shell = "/usr/bin/bash"  # default: "/usr/bin/sh"
 # workdir move to before executing command from $repo.exec
 workdir = "/"  # default: "/"
 
-[[repo]]  # full example
+[[repos]]  # full example
 name = "username/repo-name"            # name of the repository in <username>/<repo-name> format
 shell = "/usr/bin/fish"                # (optional) overwrites $shell for this repository
 workdir = "/home/username/repo-name/"  # (optional) overwrites $workdir for this repository
 exec = "./script.fish"                 # command to execute when push event is received
 
-[[repo]]  # the most simple example
+[[repos]]  # the most simple example
 name = "username/repo-name"
 exec = "/home/username/scripts/alert.sh"
 
 # other examples
-[[repo]]  
+[[repos]]  
 name = "username/repo-name"
 workdir = "/home/username/repo-name/"
 exec = "git pull"
 
-[[repo]]
+[[repos]]
 name = "username/website"
 workdir = "/home/username/repos/website/"
 exec = "bash scripts/on-push.bash"
@@ -84,8 +83,6 @@ _Note: you need to restart **puffy** after every config file edits._
 When **puffy** is set up, it's time to run it! **Puffy** is supposed to be used with **systemd**, 
 but nothing prevents you from running it in the way you want. 
 Directly for example, just using the `puffy` command. And I recommend you to do it at first just to make sure everything's fine. Anyway, I will show how to use it with **systemd**.
-
-
 
 At first start **puffy** service:
 
