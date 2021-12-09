@@ -32,7 +32,7 @@ All deletions will require your confirmation.
 ## Usage guide
 * [Step 1: configuring puffy](https://github.com/jieggii/puffy/tree/dev#step-1-configuring-puffy)
 * [Step 2: running puffy](https://github.com/jieggii/puffy/tree/dev#step-2-running-puffy)
-* [Step 3: seting-up GitHub repository](https://github.com/jieggii/puffy/tree/dev#step-3-setting-up-github-repository)
+* [Step 3: seting-up GitHub repository](https://github.com/jieggii/puffy/tree/dev#step-3-setting-up-your-github-repository)
 
 ### Step 1: configuring puffy
 You will need to configure **puffy** at first. Configuration file is in **TOML** format, so 
