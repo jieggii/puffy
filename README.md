@@ -49,7 +49,7 @@ endpoint = "/"    # endpoint to listen to (default: "/")
 # shell to use when running command from $repo.exec 
 shell = "/usr/bin/bash"  # default: "/usr/bin/sh"
 
-# workdir move to before executing command from $repo.exec
+# directory to go to before executing command from $repo.exec
 workdir = "/"  # default: "/"
 
 [[repos]]  # full example
@@ -72,7 +72,6 @@ exec = "git pull"
 name = "username/website"
 workdir = "/home/username/repos/website/"
 exec = "bash scripts/on-push.bash"
-
 ```
 
 Edit fields and add your repositories.
