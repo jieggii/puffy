@@ -88,7 +88,7 @@ When **puffy** is set up, it's time to run it! **Puffy** is supposed to be used 
 but nothing prevents you from running it in the way you want. 
 Directly for example, just using the `puffy` command. And I recommend you to do it at first just to make sure everything's fine. Anyway, I will show how to use it with **systemd**.
 
-At first start **puffy** service:
+At first start the puffy service:
 
 `sudo systemctl start puffy.service`
 
@@ -96,9 +96,13 @@ You can check its status if you want to make sure it is running properly:
 
 `systemctl status puffy.service`
 
-And after that you would probably like to *enable* it to make **puffy** always start after boot:
+And after that you would probably like to *enable* it to make puffy always start after boot:
 
 `sudo systemctl enable puffy.service`
+
+You can also read puffy logs using
+
+`sudo journalctl -u puffy.service`
 </details>
 
 <details>
