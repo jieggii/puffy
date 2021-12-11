@@ -7,6 +7,9 @@ which is supposed to be run as **systemd service**.
 * **make**
 * **sh** (used by default) or any other shell that treats `-c` flag as command to execute
 
+## Security
+...
+
 ## Installation
 The program can be easily installed using **make** command:
 
@@ -16,7 +19,7 @@ make install
 
 It will:
 * Build **puffy** binary and move it to `/usr/bin/puffy`
-* Create `/etc/puffy/` directory and copy [example config file]() to it
+* Create `/etc/puffy/` directory and copy [example config file](https://github.com/jieggii/puffy/blob/master/config.example.toml) to it
 * Copy `puffy.service` to `/etc/systemd/system/` directory
 
 ## Uninstallation
@@ -30,7 +33,7 @@ All **puffy** data (its binary - `/usr/bin/puffy`, config directory - `/etc/puff
 and **systemd** service file - `/etc/systemd/system/puffy.service`) will be removed. 
 All deletions will require your confirmation.
 
-## How to start using it?
+## Usage guide
 <details>
 <summary>Step 1: configure puffy</summary>
 
