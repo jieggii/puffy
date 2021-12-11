@@ -16,7 +16,7 @@ make install
 
 It will:
 * Build **puffy** binary and move it to `/usr/bin/puffy`
-* Create `/etc/puffy/` directory and copy [example (default) puffy config file]() to it
+* Create `/etc/puffy/` directory and copy [example config file]() to it
 * Copy `puffy.service` to `/etc/systemd/system/` directory
 
 ## Uninstallation
@@ -30,12 +30,10 @@ All **puffy** data (its binary - `/usr/bin/puffy`, config directory - `/etc/puff
 and **systemd** service file - `/etc/systemd/system/puffy.service`) will be removed. 
 All deletions will require your confirmation.
 
-## Usage guide
-* [Step 1: configuring puffy](https://github.com/jieggii/puffy/tree/dev#step-1-configuring-puffy)
-* [Step 2: running puffy](https://github.com/jieggii/puffy/tree/dev#step-2-running-puffy)
-* [Step 3: seting-up GitHub repository](https://github.com/jieggii/puffy/tree/dev#step-3-setting-up-your-github-repository)
+## How to start using it?
+<details>
+<summary>Step 1: configuring puffy</summary>
 
-### Step 1: configuring puffy
 You will need to configure **puffy** at first. Configuration file is in **TOML** format, so 
 primarily get acquainted with [toml specification](https://toml.io/en/v1.0.0) 
 (especially pay attention to [array of tables](https://toml.io/en/v1.0.0#array-of-tables)).
@@ -78,8 +76,11 @@ exec = "bash scripts/on-push.bash"
 Edit fields and add your repositories.
 
 _Note: you need to restart **puffy** after every config file edits._
+</details>
 
-### Step 2: running puffy
+<details>
+<summary>Step 2: running puffy</summary>
+
 When **puffy** is set up, it's time to run it! **Puffy** is supposed to be used with **systemd**, 
 but nothing prevents you from running it in the way you want. 
 Directly for example, just using the `puffy` command. And I recommend you to do it at first just to make sure everything's fine. Anyway, I will show how to use it with **systemd**.
@@ -95,8 +96,11 @@ You can check its status if you want to make sure it is running properly:
 And after that you would probably like to *enable* it to make **puffy** always start after boot:
 
 `sudo systemctl enable puffy.service`
+</details>
 
-### Step 3: setting up your GitHub repository
+<details>
+<summary>Step 3: setting up your GitHub repository</summary>
+
 Now, when **puffy** is configured, running on your servier and waiting for push events,
 it's time to configure your GitHub repository.
 
@@ -111,6 +115,7 @@ it's time to configure your GitHub repository.
 click on your webhook, then go to **Recent deliveries** tab and click on the first delivery. 
 It should look like this (with response code **200** and `pong!` phrase):
 ![pic3](https://imgur.com/inL7aXG.jpg)
+</details>
 
 ## TODO
 - [ ] Add payload signature validation
