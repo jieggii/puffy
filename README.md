@@ -32,13 +32,13 @@ All deletions will require your confirmation.
 
 ## How to start using it?
 <details>
-<summary>Step 1: configure  <strong>puffy</strong></summary>
+<summary>Step 1: configure puffy</summary>
 
 You will need to configure **puffy** at first. Configuration file is in **TOML** format, so 
 primarily get acquainted with [toml specification](https://toml.io/en/v1.0.0) 
 (especially pay attention to [array of tables](https://toml.io/en/v1.0.0#array-of-tables)).
 
-Then open `/etc/puffy/config.toml` (this is where **puffy** config file is located by default)
+Then open `/etc/puffy/config.toml` (this is where its config file is located by default)
 with your favourite text editor:
 ```toml
 host = "0.0.0.0"  # host to listen to (default: "0.0.0.0")
@@ -75,11 +75,11 @@ exec = "bash scripts/on-push.bash"
 
 Edit fields and add your repositories.
 
-_Note: you need to restart **puffy** after every config file edits._
+_**Note:** you need to restart puffy after every config file edits._
 </details>
 
 <details>
-<summary>Step 2: start <strong>puffy</strong> </summary>
+<summary>Step 2: start puffy</summary>
 
 When **puffy** is set up, it's time to run it! **Puffy** is supposed to be used with **systemd**, 
 but nothing prevents you from running it in the way you want. 
@@ -99,7 +99,7 @@ And after that you would probably like to *enable* it to make **puffy** always s
 </details>
 
 <details>
-<summary>Step 3: set up your  <strong>GitHub</strong> repository</summary>
+<summary>Step 3: set up your GitHub repository</summary>
 
 Now, when **puffy** is configured, running on your servier and waiting for push events,
 it's time to configure your GitHub repository.
@@ -113,7 +113,7 @@ it's time to configure your GitHub repository.
 
 **Done!** Webhook is configured. Now, to check if everythng works fine, 
 click on your webhook, then go to **Recent deliveries** tab and click on the first delivery. 
-It should look like this (with response code **200** and `pong!` phrase):
+It should look like this (with response code **200** and `pong!` body):
 ![pic3](https://imgur.com/inL7aXG.jpg)
 </details>
 
