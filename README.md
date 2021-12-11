@@ -32,7 +32,7 @@ All deletions will require your confirmation.
 
 ## How to start using it?
 <details>
-<summary>Step 1: configure **puffy**</summary>
+<summary>Step 1: configure  <strong>puffy</strong></summary>
 
 You will need to configure **puffy** at first. Configuration file is in **TOML** format, so 
 primarily get acquainted with [toml specification](https://toml.io/en/v1.0.0) 
@@ -79,7 +79,7 @@ _Note: you need to restart **puffy** after every config file edits._
 </details>
 
 <details>
-<summary>Step 2: start **puffy**</summary>
+<summary>Step 2: start <strong>puffy</strong> </summary>
 
 When **puffy** is set up, it's time to run it! **Puffy** is supposed to be used with **systemd**, 
 but nothing prevents you from running it in the way you want. 
@@ -99,7 +99,7 @@ And after that you would probably like to *enable* it to make **puffy** always s
 </details>
 
 <details>
-<summary>Step 3: set up your **GitHub** repository</summary>
+<summary>Step 3: set up your  <strong>GitHub</strong> repository</summary>
 
 Now, when **puffy** is configured, running on your servier and waiting for push events,
 it's time to configure your GitHub repository.
