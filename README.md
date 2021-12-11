@@ -3,8 +3,9 @@
 which is supposed to be run as **systemd service**.
 
 ## Dependencies
-* [golang](https://go.dev)
-* [make](https://www.gnu.org/software/make/)
+* **golang**
+* **make**
+* **sh** (used by default) or any other shell that treats `-c` flag as command to execute
 
 ## Installation
 The program can be easily installed using **make** command:
@@ -52,17 +53,17 @@ shell = "/usr/bin/bash"  # default: "/usr/bin/sh"
 # directory to go to before executing command from $repo.exec
 workdir = "/"  # default: "/"
 
-[[repos]]  # full example
+[[repos]]  # full repository example
 name = "username/repo-name"            # name of the repository in <username>/<repo-name> format
 shell = "/usr/bin/fish"                # (optional) overwrites $shell for this repository
 workdir = "/home/username/repo-name/"  # (optional) overwrites $workdir for this repository
 exec = "./script.fish"                 # command to execute when push event is received
 
-[[repos]]  # the most simple example
+[[repos]]  # the most simple repository example
 name = "username/repo-name"
 exec = "/home/username/scripts/alert.sh"
 
-# other examples
+# other repository examples
 [[repos]]  
 name = "username/repo-name"
 workdir = "/home/username/repo-name/"
