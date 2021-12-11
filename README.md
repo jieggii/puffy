@@ -4,8 +4,8 @@ which is supposed to be run as **systemd service**.
 
 ## Dependencies
 * **golang**
-* **make**
 * **sh** (used by default) or any other shell that treats `-c` flag as command to execute
+* **make** - optinal, used to install **puffy**  
 
 ## Installation
 The program can be easily installed using **make** command:
