@@ -83,7 +83,7 @@ _**Note:** you need to restart puffy after every config file edits._
 
 When **puffy** is set up, it's time to run it! **Puffy** is supposed to be used with **systemd**, 
 but nothing prevents you from running it in the way you want. 
-Directly for example, just using the `puffy` command. And I recommend you to do it at first just to make sure everything's fine. Anyway, I will show how to use it with **systemd**.
+Directly for example, just using the `puffy` command. And I recommend you to do it at first time just to make sure everything's fine. Anyway, I will show how to use it with **systemd**.
 
 At first start the puffy service:
 
