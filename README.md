@@ -82,7 +82,7 @@ _**Note:** you need to restart puffy after every config file edits._
 </details>
 
 <details>
-<summary>Step 2: start puffy</summary>
+<summary>Step 2: run puffy</summary>
 
 When **puffy** is set up, it's time to run it! **Puffy** is supposed to be used with **systemd**, 
 but nothing prevents you from running it in the way you want. 
