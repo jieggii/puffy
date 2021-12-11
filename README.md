@@ -4,7 +4,7 @@ which is supposed to be run as **systemd service**.
 
 ## Dependencies
 * **golang**
-* **sh** (used by default) or any other shell that treats `-c` flag as command to execute
+* **sh** (used by default) or any other shell that treats `-c` flag as command to execute (e.g. **bash**, **fish**, **zsh**, etc.)
 * **make** - optinal, used only for installation  
 
 ## Installation
