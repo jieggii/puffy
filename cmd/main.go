@@ -33,7 +33,6 @@ func handleRequest(w http.ResponseWriter, r *http.Request, cfg *Config) {
 
 		if ping_event_decode_err != nil {
 			http.Error(w, "Invalid request body", http.StatusBadRequest)
-			log.Println(ping_event_decode_err)
 			log.Println("Warning: received invalid request body (request from " + getIP(r) + ")")
 			return
 		}
