@@ -16,8 +16,8 @@ import (
 func handleRequest(w http.ResponseWriter, r *http.Request, cfg *Config) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		http.Error(w, "Could not read request body", http.StatusBadRequest)
 		log.Println("Warning: could not read request body (request from " + getIP(r) + ")")
+		http.Error(w, "Could not read request body", http.StatusBadRequest)
 		return
 	}
 	var event Event
@@ -32,26 +32,25 @@ func handleRequest(w http.ResponseWriter, r *http.Request, cfg *Config) {
 		).Decode(&pingEvent)
 
 		if ping_event_decode_err != nil {
-			http.Error(w, "Invalid request body", http.StatusBadRequest)
 			log.Println("Warning: received invalid request body (request from " + getIP(r) + ")")
+			http.Error(w, "Invalid request body", http.StatusBadRequest)
 			return
 		}
 		if resloveRepo(pingEvent.Repository.FullName, cfg) == nil {
-			http.Error(w, "Unknown repository", http.StatusForbidden)
 			log.Println("Warning: received ping event from unknown repository: " + pingEvent.Repository.FullName)
+			http.Error(w, "Unknown repository", http.StatusForbidden)
 			return
 		}
-		w.Write([]byte("pong!"))
 		log.Println("Received ping event from " + pingEvent.Repository.FullName)
+		w.Write([]byte("pong!"))
 		return
 	}
 	repo := resloveRepo(event.Repository.FullName, cfg)
 	if repo == nil {
-		http.Error(w, "Unknown repository", http.StatusForbidden)
 		log.Println("Warning: received push event from unknown repository: " + event.Repository.FullName)
+		http.Error(w, "Unknown repository", http.StatusForbidden)
 		return
 	}
-	w.Write([]byte("The event will be handled"))
 	log.Println("Received push event from " + repo.Name)
 
 	shell := selectShell(repo, cfg)
@@ -60,11 +59,12 @@ func handleRequest(w http.ResponseWriter, r *http.Request, cfg *Config) {
 	strPID, err := executeCommand(shell, workdir, repo.Exec, repo.Name)
 	if err != nil {
 		strError := err.Error()
-		http.Error(w, strError, http.StatusInternalServerError)
 		log.Println(strError)
+		http.Error(w, strError, http.StatusInternalServerError)
 		return
 	}
 	log.Println("Spawned process for " + repo.Name + " (PID: " + strPID + ")")
+	w.Write([]byte("The event will be handled"))
 }
 
 func startServer(c *cli.Context) error {
