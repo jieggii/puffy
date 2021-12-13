@@ -54,32 +54,32 @@ func validateConfig(meta toml.MetaData, config *Config) {
 	keys := meta.Keys()
 	undecoded := meta.Undecoded()
 	if len(undecoded) != 0 {
-		log.Fatal("Fatal: unexpected ", undecoded, " keys in the config file")
+		log.Fatal("Fatal: unexpected ", undecoded, " keys in the config")
 	}
 	if !keyIsPresent("port", keys) {
-		log.Fatal("Fatal: required field 'port' is not set in the config file")
+		log.Fatal("Fatal: required field 'port' is not set in the config")
 	}
 	if len(config.Repos) == 0 {
-		log.Fatal("Fatal: no repositories specified in the config file")
+		log.Fatal("Fatal: no repositories specified in the config")
 	}
 	if !pathExists(config.Shell) {
-		log.Fatal("Fatal: 'shell' specified in the config file (" + config.Shell + ") does not exist")
+		log.Fatal("Fatal: 'shell' specified in the config (" + config.Shell + ") does not exist")
 	}
 	if !pathExists(config.Workdir) {
-		log.Fatal("Fatal: 'workdir' specified in the config file (" + config.Workdir + ") does not exist")
+		log.Fatal("Fatal: 'workdir' specified in the config (" + config.Workdir + ") does not exist")
 	}
 	for i, repo := range config.Repos {
 		if repo.Name == "" {
-			log.Fatal("Fatal: missing required field 'name' in the repo #" + strconv.Itoa(i+1) + " in the config file")
+			log.Fatal("Fatal: missing required field 'name' in the repo #" + strconv.Itoa(i+1) + " in the config")
 		}
 		if repo.Exec == "" {
-			log.Fatal("Fatal: missing required field 'exec' in repo with name '" + repo.Name + "' in the config file")
+			log.Fatal("Fatal: missing required field 'exec' in repo with name '" + repo.Name + "' in the config")
 		}
 		if repo.Workdir != "" && !pathExists(repo.Workdir) {
-			log.Fatal("Fatal: 'workdir' specified in the config file (" + repo.Workdir + ") of repo " + repo.Name + " does not exist")
+			log.Fatal("Fatal: 'workdir' specified in the config (" + repo.Workdir + ") of repo " + repo.Name + " does not exist")
 		}
 		if repo.Shell != "" && !pathExists(repo.Shell) {
-			log.Fatal("Fatal: 'shell' specified in the config file (" + repo.Shell + ") of repo " + repo.Name + " does not exist")
+			log.Fatal("Fatal: 'shell' specified in the config (" + repo.Shell + ") of repo " + repo.Name + " does not exist")
 		}
 	}
 }
@@ -108,7 +108,7 @@ func prepareConfig(meta toml.MetaData, config *Config) *Config {
 
 func loadConfig(configPath string) *Config {
 	var config Config
-	log.Println("Using config:", configPath)
+	log.Println("Using config file:", configPath)
 	meta, err := toml.DecodeFile(
 		configPath,
 		&config,
