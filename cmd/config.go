@@ -66,7 +66,7 @@ func validateConfig(meta toml.MetaData, config *Config) {
 		log.Fatal("Fatal: 'shell' specified in the config file (" + config.Shell + ") does not exist")
 	}
 	if !pathExists(config.Workdir) {
-		log.Fatal("Fatal: 'workdir' specified in the config file )" + config.Workdir + ") does not exist")
+		log.Fatal("Fatal: 'workdir' specified in the config file (" + config.Workdir + ") does not exist")
 	}
 	for i, repo := range config.Repos {
 		if repo.Name == "" {
