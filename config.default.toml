@@ -1,0 +1,9 @@
+port = 8080                # port to listen to
+#host = "0.0.0.0"          # host to listen to (default: "0.0.0.0")
+#endpoint = "/"            # endpoint to listen to (default: "/")
+#shell = "/usr/bin/sh"     # shell to use when running command from $repos[i].execute
+                           # (default: "/usr/bin/sh")
+#workdir = "/"             # workdir to go to when running command from $repos[i].execute
+                           # (default: "/")
+
+[[repos]]

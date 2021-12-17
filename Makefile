@@ -18,7 +18,7 @@ install: build
 	@echo "[*] Installing puffy..."
 	@sudo mv -iv ./bin/puffy /usr/bin/puffy
 	@sudo mkdir -pv /etc/puffy
-	@sudo cp -iv config.example.toml /etc/puffy/config.toml
+	@sudo cp -iv config.default.toml /etc/puffy/config.toml
 	@sudo cp -iv puffy.service /etc/systemd/system/
 	@echo "[+] Puffy was successfully installed"
 	@echo "Now you would probably like to edit the config file (/etc/puffy/config.toml)"

@@ -16,7 +16,7 @@ make install
 
 It will:
 * Build **puffy** binary and move it to `/usr/bin/puffy`
-* Create `/etc/puffy/` directory and copy [example config file](https://github.com/jieggii/puffy/blob/master/config.example.toml) to it
+* Create `/etc/puffy/` directory and copy [default config file](https://github.com/jieggii/puffy/blob/master/config.default.toml) to it
 * Copy `puffy.service` to `/etc/systemd/system/` directory
 
 ## Uninstallation
@@ -39,7 +39,10 @@ primarily get acquainted with [toml specification](https://toml.io/en/v1.0.0)
 (especially pay attention to [array of tables](https://toml.io/en/v1.0.0#array-of-tables)).
 
 Then open `/etc/puffy/config.toml` (this is where its config file is located by default)
-with your favourite text editor:
+with your favourite text editor and fill everything needed and add your repositories.
+
+[Example config](https://github.com/jieggii/puffy/blob/master/config.example.toml):
+
 ```toml
 host = "0.0.0.0"  # host to listen to (default: "0.0.0.0")
 port = 8080       # port to listen to
@@ -106,7 +109,7 @@ You can also read puffy logs using this command:
 <summary>Step 3: set up your GitHub repository</summary>
 
 Now, when **puffy** is configured, running on your servier and waiting for push events,
-it's time to configure your GitHub repository.
+it's time to set up your GitHub repository.
 
 1. Go to repository **settings** and choose **Webhooks** meny entry.
 ![pic1](https://imgur.com/To3W0yT.jpg)
