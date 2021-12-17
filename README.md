@@ -76,8 +76,6 @@ workdir = "/home/username/repos/website/"
 exec = "bash scripts/on-push.bash"
 ```
 
-Edit fields and add your repositories.
-
 _**Note:** you need to restart puffy after every config file edits._
 </details>
 
