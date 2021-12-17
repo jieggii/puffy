@@ -44,21 +44,33 @@ with your favourite text editor and fill everything needed and add your reposito
 [Example config](https://github.com/jieggii/puffy/blob/master/config.example.toml):
 
 ```toml
-host = "0.0.0.0"  # host to listen to (default: "0.0.0.0")
-port = 8080       # port to listen to
-endpoint = "/"    # endpoint to listen to (default: "/")
+host = "0.0.0.0"         # (optional, default: "0.0.0.0")
+                         # host to listen to
 
-# shell to use when running command from $repo.exec 
-shell = "/usr/bin/bash"  # default: "/usr/bin/sh"
+port = 8080              # (required)
+                         # port to listen to
 
-# directory to go to before executing command from $repo.exec
-workdir = "/"  # default: "/"
+endpoint = "/"           # (optional, default: "/") 
+                         # endpoint to listen to
+
+shell = "/usr/bin/bash"  # (optonal, default: "/") 
+                         # shell to use when running command from $repos[i].exec
+                           
+workdir = "/"            # (optional, default: "/") 
+                         # workdir to go to when running command from $repos[i].exec
 
 [[repos]]  # full repository example
-name = "username/repo-name"            # name of the repository in <username>/<repo-name> format
-shell = "/usr/bin/fish"                # (optional) overwrites $shell for this repository
-workdir = "/home/username/repo-name/"  # (optional) overwrites $workdir for this repository
-exec = "./script.fish"                 # command to execute when push event is received
+name = "username/repo"   # (required)
+                         # name of the repository in <username>/<repo-name> format
+
+shell = "/usr/bin/fish"  # (optional, default: $shell) 
+                         # overwrite $shell for this repository
+
+workdir = "/root/repo"   # (optional, default: $workdir) 
+                         # overwrite $workdir for this repository
+
+exec = "./script.fish"   # (required)
+                         # command to execute when push event is received
 
 [[repos]]  # the most simple repository example
 name = "username/repo-name"
