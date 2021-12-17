@@ -5,7 +5,7 @@ which is supposed to be run as **systemd service**.
 ## Dependencies
 * **golang** >= 1.16
 * **sh** (used by default) or any other shell that treats `-c` flag as command to execute (e.g. **bash**, **fish**, **zsh**, etc.)
-* **make** - optinal, used for installation only
+* **make** - optinal, used for installation
 
 ## Installation
 The program can be easily installed using **make** command:
@@ -15,7 +15,7 @@ make install
 ```
 
 It will:
-* Build **puffy** binary and move it to `/usr/bin/puffy`
+* Build **puffy** binary and copy it to `/usr/bin/puffy`
 * Create `/etc/puffy/` directory and copy [default config file](https://github.com/jieggii/puffy/blob/master/config.default.toml) to it
 * Copy `puffy.service` to `/etc/systemd/system/` directory
 
@@ -39,7 +39,7 @@ primarily get acquainted with [toml specification](https://toml.io/en/v1.0.0)
 (especially pay attention to [array of tables](https://toml.io/en/v1.0.0#array-of-tables)).
 
 Then open `/etc/puffy/config.toml` (this is where its config file is located by default)
-with your favourite text editor and fill everything needed and add your repositories.
+with your favourite text editor and set everything you need and add your repositories.
 
 [Example config](https://github.com/jieggii/puffy/blob/master/config.example.toml):
 
