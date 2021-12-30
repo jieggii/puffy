@@ -53,7 +53,7 @@ port = 8080              # (required)
 endpoint = "/"           # (optional, default: "/") 
                          # endpoint to listen to
 
-shell = "/usr/bin/bash"  # (optonal, default: "/") 
+shell = "/usr/bin/bash"  # (optonal, default: "/usr/bin/sh") 
                          # shell to use when running command from $repos[i].exec
                            
 workdir = "/"            # (optional, default: "/") 
