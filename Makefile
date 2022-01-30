@@ -8,7 +8,6 @@ fmt:
 
 build:
 	go mod vendor
-	mkdir -p bin/
 	go build -o puffy cmd/*.go
 
 install: build
