@@ -1,6 +1,6 @@
 go.sum
-/vendor/
-/Godeps/
-/.vscode/
-/.idea/
-/bin/
+vendor/
+Godeps/
+.vscode/
+.idea/
+puffy
