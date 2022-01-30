@@ -23,7 +23,7 @@ It will:
 To uninstall **puffy** simply run:
 
 ```shell
-make uninstall
+sudo make uninstall
 ```
 
 All **puffy** data (its binary - `/usr/bin/puffy`, config directory - `/etc/puffy/` 
