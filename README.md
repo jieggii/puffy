@@ -11,7 +11,7 @@ which is supposed to be run as **systemd service**.
 The program can be easily installed using **make** command:
 
 ```shell
-make install
+sudo make install
 ```
 
 It will:
